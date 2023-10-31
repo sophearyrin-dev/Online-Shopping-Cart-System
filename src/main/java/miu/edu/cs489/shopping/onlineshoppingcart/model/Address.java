@@ -28,11 +28,16 @@ public class Address {
     @Column(length = 5)
     private String zipCode;
 
-    @ManyToOne
-    @JoinColumn(name = "customer_id")
+    @OneToOne(mappedBy = "address")
     private Customer customer;
 
     @OneToOne(mappedBy = "address")
     private Shipment shipment;
 
+    public Address(String street, String city, String state, String zipCode) {
+        this.street = street;
+        this.city = city;
+        this.state = state;
+        this.zipCode = zipCode;
+    }
 }

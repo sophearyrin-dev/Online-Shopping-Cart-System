@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -26,12 +27,14 @@ public class Customer {
 
     private String email;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate dob;
 
     private String phoneNumber;
 
-    @OneToMany(mappedBy = "customer")
-    private List<Address> addresses;
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "address_id", unique = true)
+    private Address address;
 
     @OneToMany(mappedBy = "customer")
     private List<Wishlist> wishlists;
