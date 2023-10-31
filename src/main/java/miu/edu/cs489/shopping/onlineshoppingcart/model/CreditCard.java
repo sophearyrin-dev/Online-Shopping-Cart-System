@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -29,7 +30,7 @@ public class CreditCard {
 
     private String cvc;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "customer_id")
     private Customer customer;
 
@@ -37,4 +38,18 @@ public class CreditCard {
     private Payment payment;
 
 
+    public CreditCard(String ccName, String ccNumber, LocalDate expirationDate, String cvc, Customer customer) {
+        this.ccName = ccName;
+        this.ccNumber = ccNumber;
+        this.expirationDate = expirationDate;
+        this.cvc = cvc;
+        this.customer = customer;
+    }
+
+    public CreditCard(String ccName, String ccNumber, LocalDate expirationDate, String cvc) {
+        this.ccName = ccName;
+        this.ccNumber = ccNumber;
+        this.expirationDate = expirationDate;
+        this.cvc = cvc;
+    }
 }

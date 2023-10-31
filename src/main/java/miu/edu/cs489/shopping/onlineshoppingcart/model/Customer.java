@@ -42,8 +42,8 @@ public class Customer {
     @OneToMany(mappedBy = "customer")
     private List<Cart> cart;
 
-    @OneToOne(mappedBy = "customer")
-    private CreditCard creditCard;
+    @OneToMany(mappedBy = "customer")
+    private List<CreditCard> creditCards;
 
     @OneToMany(mappedBy = "customer")
     private List<Order> orders;
@@ -55,5 +55,9 @@ public class Customer {
         this.dob = dob;
         this.phoneNumber = phoneNumber;
         this.address = address;
+    }
+
+    public Customer(Integer customerId) {
+        this.customerId = customerId;
     }
 }

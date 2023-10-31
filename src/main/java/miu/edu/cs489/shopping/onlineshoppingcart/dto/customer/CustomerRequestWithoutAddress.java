@@ -1,15 +1,11 @@
 package miu.edu.cs489.shopping.onlineshoppingcart.dto.customer;
 
-
-import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
-import miu.edu.cs489.shopping.onlineshoppingcart.dto.address.AddressRequest;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
 
-public record CustomerRequest(
-
+public record CustomerRequestWithoutAddress (
         String fistName,
 
         String lastName,
@@ -20,8 +16,6 @@ public record CustomerRequest(
         String email,
 
         @DateTimeFormat(pattern = "yyyy-MM-dd")
-        LocalDate dob,
-
-        @Valid AddressRequest address
-) {
+        LocalDate dob
+){
 }
