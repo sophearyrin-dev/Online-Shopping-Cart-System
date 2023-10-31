@@ -27,8 +27,8 @@ public class CustomerServiceImp implements CustomerService {
         return customerRepository.findAll(Sort.by("lastName")).stream()
                 .map(p -> new CustomerResponse(
                         p.getCustomerId(),
-                        p.getFirstname(),
-                        p.getLastname(),
+                        p.getFirstName(),
+                        p.getLastName(),
                         p.getPhoneNumber(),
                         p.getEmail(),
                         p.getDob(),
@@ -62,8 +62,8 @@ public class CustomerServiceImp implements CustomerService {
 
         CustomerResponse customerResponse = new CustomerResponse(
                 savedCustomer.getCustomerId(),
-                savedCustomer.getFirstname(),
-                savedCustomer.getLastname(),
+                savedCustomer.getFirstName(),
+                savedCustomer.getLastName(),
                 savedCustomer.getPhoneNumber(),
                 savedCustomer.getEmail(),
                 savedCustomer.getDob(),
@@ -86,8 +86,8 @@ public class CustomerServiceImp implements CustomerService {
 
         CustomerResponse patientResponse = new CustomerResponse(
                 customer.getCustomerId(),
-                customer.getFirstname(),
-                customer.getLastname(),
+                customer.getFirstName(),
+                customer.getLastName(),
                 customer.getPhoneNumber(),
                 customer.getEmail(),
                 customer.getDob(),
@@ -112,8 +112,8 @@ public class CustomerServiceImp implements CustomerService {
                         String.format("Error: Customer with Id, %d, is not found", customerId)));
 
 
-        customer.setFirstname(customerRequest.fistName());
-        customer.setLastname(customerRequest.lastName());
+        customer.setFirstName(customerRequest.fistName());
+        customer.setLastName(customerRequest.lastName());
         customer.setPhoneNumber(customerRequest.phoneNumber());
         customer.setEmail(customerRequest.email());
         customer.setDob(customerRequest.dob());
@@ -131,8 +131,8 @@ public class CustomerServiceImp implements CustomerService {
 
         CustomerResponse patientResponse = new CustomerResponse(
                 updatedCustomer.getCustomerId(),
-                updatedCustomer.getFirstname(),
-                updatedCustomer.getLastname(),
+                updatedCustomer.getFirstName(),
+                updatedCustomer.getLastName(),
                 updatedCustomer.getPhoneNumber(),
                 updatedCustomer.getEmail(),
                 updatedCustomer.getDob(),

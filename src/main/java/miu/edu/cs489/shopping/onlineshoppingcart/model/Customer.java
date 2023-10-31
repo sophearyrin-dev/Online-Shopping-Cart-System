@@ -21,9 +21,9 @@ public class Customer {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer customerId;
 
-    private String firstname;
+    private String firstName;
 
-    private String lastname;
+    private String lastName;
 
     private String email;
 
@@ -48,12 +48,9 @@ public class Customer {
     @OneToMany(mappedBy = "customer")
     private List<Order> orders;
 
-    public Customer(String firstname, String lastname,
-                    String email, LocalDate dob,
-                    String phoneNumber,
-                    Address address) {
-        this.firstname = firstname;
-        this.lastname = lastname;
+    public Customer(String firstName, String lastName, String email, LocalDate dob, String phoneNumber, Address address) {
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.email = email;
         this.dob = dob;
         this.phoneNumber = phoneNumber;

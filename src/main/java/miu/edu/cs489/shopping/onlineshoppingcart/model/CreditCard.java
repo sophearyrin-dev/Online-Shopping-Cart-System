@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
 
@@ -23,6 +24,7 @@ public class CreditCard {
 
     private String ccNumber;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate expirationDate;
 
     private String cvc;
