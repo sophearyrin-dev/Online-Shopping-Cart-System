@@ -40,4 +40,12 @@ public class Address {
         this.state = state;
         this.zipCode = zipCode;
     }
+
+    public Address(Integer addressId, String street, String city, String state, String zipCode) {
+        this.addressId = addressId;
+        this.street = street;
+        this.city = city;
+        this.state = state;
+        this.zipCode = zipCode;
+    }
 }

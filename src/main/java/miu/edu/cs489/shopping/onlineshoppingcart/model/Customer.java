@@ -19,7 +19,7 @@ public class Customer {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int customerId;
+    private Integer customerId;
 
     private String firstname;
 
@@ -48,5 +48,15 @@ public class Customer {
     @OneToMany(mappedBy = "customer")
     private List<Order> orders;
 
-
+    public Customer(String firstname, String lastname,
+                    String email, LocalDate dob,
+                    String phoneNumber,
+                    Address address) {
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.email = email;
+        this.dob = dob;
+        this.phoneNumber = phoneNumber;
+        this.address = address;
+    }
 }

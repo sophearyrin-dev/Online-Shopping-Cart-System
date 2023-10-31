@@ -1,6 +1,7 @@
 package miu.edu.cs489.shopping.onlineshoppingcart.advice;
 
 import miu.edu.cs489.shopping.onlineshoppingcart.exception.AddressNotFoundException;
+import miu.edu.cs489.shopping.onlineshoppingcart.exception.CustomerNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -25,17 +26,17 @@ public class OnlineShoppingCartWebAPIExceptionHandlerGlobal {
 
     }
 
-//    @ExceptionHandler(PatientNotFoundException.class)
-//    @ResponseStatus(HttpStatus.NOT_FOUND)
-//    public Map<String,String> handlePatientNotFoundException(PatientNotFoundException
-//                                                                     patientNotFoundException){
-//        Map<String,String> errorMessageMap = new HashMap<>();
-//
-//        errorMessageMap.put("errorMessage",patientNotFoundException.getMessage());
-//
-//        return errorMessageMap;
-//
-//    }
+    @ExceptionHandler(CustomerNotFoundException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public Map<String,String> handlePatientNotFoundException(CustomerNotFoundException
+                                                                     patientNotFoundException){
+        Map<String,String> errorMessageMap = new HashMap<>();
+
+        errorMessageMap.put("errorMessage",patientNotFoundException.getMessage());
+
+        return errorMessageMap;
+
+    }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
