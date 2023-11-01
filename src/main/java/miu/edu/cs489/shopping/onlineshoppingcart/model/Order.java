@@ -40,8 +40,11 @@ public class Order {
     @OneToMany(mappedBy = "order")
     private List<OrderLine> orderLines;
 
-
-
-
-
+    public Order(LocalDate orderDate, double totalPrice, Shipment shipment, Payment payment, Customer customer) {
+        this.orderDate = orderDate;
+        this.totalPrice = totalPrice;
+        this.shipment = shipment;
+        this.payment = payment;
+        this.customer = customer;
+    }
 }

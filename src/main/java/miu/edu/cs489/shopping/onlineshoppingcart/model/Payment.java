@@ -18,7 +18,7 @@ public class Payment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer paymentId;
 
-    private final String paymentMethod = "CREDIT_CARD";
+    private String paymentMethod;
 
     private LocalDate paymentDate;
 
@@ -29,5 +29,9 @@ public class Payment {
     @OneToOne(mappedBy = "payment")
     private Order order;
 
-
+    public Payment(String paymentMethod, LocalDate paymentDate, CreditCard creditCard) {
+        this.paymentMethod = paymentMethod;
+        this.paymentDate = paymentDate;
+        this.creditCard = creditCard;
+    }
 }

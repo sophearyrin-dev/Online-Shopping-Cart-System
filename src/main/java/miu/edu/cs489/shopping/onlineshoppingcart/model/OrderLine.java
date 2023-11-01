@@ -28,5 +28,10 @@ public class OrderLine {
     @JoinColumn(name = "order_id")
     private Order order;
 
-
+    public OrderLine(int quantity, double subtotal, Product product, Order order) {
+        this.quantity = quantity;
+        this.subtotal = subtotal;
+        this.product = product;
+        this.order = order;
+    }
 }
