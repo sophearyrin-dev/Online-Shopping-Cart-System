@@ -44,5 +44,10 @@ public class Product {
     @OneToMany(mappedBy = "product")
     private List<OrderLine> orderLines;
 
-
+    public Product(String SKU, String description, double price, int stock) {
+        this.SKU = SKU;
+        this.description = description;
+        this.price = price;
+        this.stock = stock;
+    }
 }

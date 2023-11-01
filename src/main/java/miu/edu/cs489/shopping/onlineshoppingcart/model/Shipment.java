@@ -27,5 +27,8 @@ public class Shipment {
     @OneToOne(mappedBy = "shipment")
     private Order order;
 
-
+    public Shipment(LocalDate shipmentDate, Address address) {
+        this.shipmentDate = shipmentDate;
+        this.address = address;
+    }
 }

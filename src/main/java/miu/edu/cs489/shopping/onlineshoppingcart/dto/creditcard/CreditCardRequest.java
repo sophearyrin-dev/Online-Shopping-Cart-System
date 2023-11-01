@@ -14,9 +14,7 @@ public record CreditCardRequest(
 
         @DateTimeFormat(pattern = "yyyy-MM-dd")
         LocalDate expirationDate,
-        String cvc,
-
-        CustomerRequest customerRequest
+        String cvc
 
 ) {
 }
