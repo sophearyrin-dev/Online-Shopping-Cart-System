@@ -1,7 +1,11 @@
 package miu.edu.cs489.shopping.onlineshoppingcart.controller;
 
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import miu.edu.cs489.shopping.onlineshoppingcart.dto.creditcard.CreditCardRequest;
 import miu.edu.cs489.shopping.onlineshoppingcart.dto.customer.CustomerRequest;
 import miu.edu.cs489.shopping.onlineshoppingcart.dto.customer.CustomerResponse;
+import miu.edu.cs489.shopping.onlineshoppingcart.dto.customer.CustomerResponseWithCreditCard;
+import miu.edu.cs489.shopping.onlineshoppingcart.exception.AddressNotFoundException;
 import miu.edu.cs489.shopping.onlineshoppingcart.exception.CustomerNotFoundException;
 import miu.edu.cs489.shopping.onlineshoppingcart.service.CustomerService;
 import org.springframework.http.HttpStatus;
@@ -12,6 +16,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/osc/api/v1/customer")
+@SecurityRequirement(name = "onlineshopapi")
 public class CustomerController {
 
     private CustomerService customerService;
@@ -55,6 +60,14 @@ public class CustomerController {
 //    public ResponseEntity<List<PatientResponse>> quickSearchPatient(@PathVariable String searchString){
 //        return new ResponseEntity<>(customerService.searchPatient(searchString), HttpStatus.FOUND);
 //    }
+
+    @PostMapping("/{customerId}/creditcard")
+    public ResponseEntity<CustomerResponseWithCreditCard> addNewCustomer(
+            @PathVariable Integer customerId,
+            @RequestBody CreditCardRequest creditCardRequest) throws CustomerNotFoundException {
+        return new ResponseEntity<>(customerService.addCustomerCreditCard(customerId,creditCardRequest),
+                HttpStatus.CREATED);
+    }
 
 
 }

@@ -9,6 +9,4 @@ public interface ProductService {
 
     List<ProductResponse> findAllProducts();
 
-    ProductResponse addNewProduct(ProductRequest productRequest);
-
 }

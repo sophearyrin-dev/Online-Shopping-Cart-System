@@ -26,6 +26,11 @@ public class OrderController {
         return ResponseEntity.ok(orderService.findAllOrder());
     }
 
+    @GetMapping("/{orderId}")
+    public ResponseEntity<OrderResponse> getOrderById(@PathVariable Integer orderId){
+        return new ResponseEntity<>(orderService.getOrderByOrderId(orderId), HttpStatus.FOUND);
+    }
+
 
 //    @PostMapping("/new")
 //    public ResponseEntity<OrderResponse> addNewAddress(@RequestBody @Valid AddressRequest addressRequest){

@@ -26,13 +26,4 @@ public class ProductController {
     public ResponseEntity<List<ProductResponse>> getAllProducts(){
         return ResponseEntity.ok(productService.findAllProducts());
     }
-
-    @PostMapping("/new")
-    public ResponseEntity<ProductResponse> addNewProduct(
-            @RequestBody ProductRequest newProduct){
-
-        return new ResponseEntity<>(productService.addNewProduct(newProduct),
-                HttpStatus.CREATED);
-
-    }
 }

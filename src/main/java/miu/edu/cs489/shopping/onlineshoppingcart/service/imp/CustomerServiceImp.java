@@ -1,25 +1,35 @@
 package miu.edu.cs489.shopping.onlineshoppingcart.service.imp;
 
 import miu.edu.cs489.shopping.onlineshoppingcart.dto.address.AddressResponse;
+import miu.edu.cs489.shopping.onlineshoppingcart.dto.creditcard.CreditCardRequest;
+import miu.edu.cs489.shopping.onlineshoppingcart.dto.creditcard.CreditCardResponseWithoutCustomer;
 import miu.edu.cs489.shopping.onlineshoppingcart.dto.customer.CustomerRequest;
 import miu.edu.cs489.shopping.onlineshoppingcart.dto.customer.CustomerResponse;
+import miu.edu.cs489.shopping.onlineshoppingcart.dto.customer.CustomerResponseWithCreditCard;
+import miu.edu.cs489.shopping.onlineshoppingcart.exception.AddressNotFoundException;
 import miu.edu.cs489.shopping.onlineshoppingcart.exception.CustomerNotFoundException;
 import miu.edu.cs489.shopping.onlineshoppingcart.model.Address;
+import miu.edu.cs489.shopping.onlineshoppingcart.model.CreditCard;
 import miu.edu.cs489.shopping.onlineshoppingcart.model.Customer;
+import miu.edu.cs489.shopping.onlineshoppingcart.repository.CreditCardRepository;
 import miu.edu.cs489.shopping.onlineshoppingcart.repository.CustomerRepository;
 import miu.edu.cs489.shopping.onlineshoppingcart.service.CustomerService;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
 public class CustomerServiceImp implements CustomerService {
     private CustomerRepository customerRepository;
+    private CreditCardRepository creditCardRepository;
 
-    public CustomerServiceImp(CustomerRepository customerRepository) {
+    public CustomerServiceImp(CustomerRepository customerRepository,
+                              CreditCardRepository creditCardRepository) {
         this.customerRepository = customerRepository;
+        this.creditCardRepository = creditCardRepository;
     }
 
     @Override
@@ -155,5 +165,48 @@ public class CustomerServiceImp implements CustomerService {
                         String.format("Error: Customer with Id, %d, is not found", customerId)));
 
         customerRepository.deleteById(customerId);
+    }
+
+    @Override
+    public CustomerResponseWithCreditCard addCustomerCreditCard(
+            Integer customerId, CreditCardRequest creditCardRequest)
+            throws CustomerNotFoundException{
+
+        var customer = customerRepository.findById(customerId)
+                .orElseThrow(() -> new CustomerNotFoundException(
+                        String.format("Error: Customer with Id, %d, is not found", customerId)
+                ));
+
+        CreditCard creditCard = new CreditCard(
+                creditCardRequest.ccName(),
+                creditCardRequest.ccNumber(),
+                creditCardRequest.expirationDate(),
+                creditCardRequest.cvc()
+        );
+        creditCard.setCustomer(customer);
+
+        CreditCard creditCardSaved = creditCardRepository.save(creditCard);
+
+        CustomerResponseWithCreditCard customerResponseWithCreditCard =
+                new CustomerResponseWithCreditCard(
+                        creditCardSaved.getCustomer().getCustomerId(),
+                        creditCardSaved.getCustomer().getFirstName(),
+                        creditCardSaved.getCustomer().getLastName(),
+                        creditCardSaved.getCustomer().getPhoneNumber(),
+                        creditCardSaved.getCustomer().getEmail(),
+                        creditCardSaved.getCustomer().getDob(),
+                        creditCardSaved.getCustomer().getCreditCards().stream().map(
+                                cc -> new CreditCardResponseWithoutCustomer(
+                                        cc.getCreditCardId(),
+                                        cc.getCcName(),
+                                        cc.getCcNumber(),
+                                        cc.getExpirationDate(),
+                                        cc.getCvc()
+                                )
+                        ).collect(Collectors.toList())
+                );
+
+
+        return customerResponseWithCreditCard;
     }
 }

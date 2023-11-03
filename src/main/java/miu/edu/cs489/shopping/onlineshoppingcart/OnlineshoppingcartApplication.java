@@ -1,5 +1,10 @@
 package miu.edu.cs489.shopping.onlineshoppingcart;
 
+import io.swagger.v3.oas.annotations.OpenAPIDefinition;
+import io.swagger.v3.oas.annotations.enums.SecuritySchemeIn;
+import io.swagger.v3.oas.annotations.enums.SecuritySchemeType;
+import io.swagger.v3.oas.annotations.info.Info;
+import io.swagger.v3.oas.annotations.security.SecurityScheme;
 import jakarta.annotation.PostConstruct;
 import miu.edu.cs489.shopping.onlineshoppingcart.model.User;
 import miu.edu.cs489.shopping.onlineshoppingcart.repository.RoleRepository;
@@ -15,6 +20,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 @SpringBootApplication
+@OpenAPIDefinition(info = @Info(title = "Online Shopping Cart API", version = "3.0", description = "Online Shopping Cart System"))
+@SecurityScheme(name = "onlineshopapi", scheme = "basic", type = SecuritySchemeType.HTTP, in = SecuritySchemeIn.HEADER)
 public class OnlineshoppingcartApplication {
 
     private UserRepository userRepository;

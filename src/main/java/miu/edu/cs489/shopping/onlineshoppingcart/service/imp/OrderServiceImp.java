@@ -106,4 +106,56 @@ public class OrderServiceImp implements OrderService {
 
         return null;
     }
+
+    @Override
+    public OrderResponse getOrderByOrderId(Integer orderId) {
+
+        List<OrderLine> orderLines = orderLineRepository.findAllByOrder_OrderId(orderId);
+        System.out.println(orderLines);
+
+        Double totalPrice = orderLines.stream().mapToDouble(
+                p -> p.getSubtotal()
+        ).sum();
+        Optional<Order> order = orderRepository.findById(orderId);
+        order.get().setTotalPrice(totalPrice);
+        OrderResponse orderResponse = new OrderResponse(
+                order.get().getOrderId(),
+                order.get().getOrderDate(),
+                order.get().getTotalPrice(),
+                new ShipmentResponse(
+                        order.get().getShipment().getShipmentId(),
+                        order.get().getShipment().getShipmentDate(),
+                        new AddressResponse(
+                                order.get().getShipment().getAddress().getAddressId(),
+                                order.get().getShipment().getAddress().getStreet(),
+                                order.get().getShipment().getAddress().getCity(),
+                                order.get().getShipment().getAddress().getState(),
+                                order.get().getShipment().getAddress().getZipCode()
+                        )
+                ),
+                new PaymentResponse(
+                        order.get().getPayment().getPaymentId(),
+                        order.get().getPayment().getPaymentMethod(),
+                        order.get().getPayment().getPaymentDate(),
+                        new CreditCardResponseWithoutCustomer(
+                                order.get().getPayment().getCreditCard().getCreditCardId(),
+                                order.get().getPayment().getCreditCard().getCcName(),
+                                order.get().getPayment().getCreditCard().getCcNumber(),
+                                order.get().getPayment().getCreditCard().getExpirationDate(),
+                                order.get().getPayment().getCreditCard().getCvc()
+                        )
+                ),
+                new CustomerResponseWithoutAddress(
+                        order.get().getCustomer().getCustomerId(),
+                        order.get().getCustomer().getFirstName(),
+                        order.get().getCustomer().getLastName(),
+                        order.get().getCustomer().getPhoneNumber(),
+                        order.get().getCustomer().getEmail(),
+                        order.get().getCustomer().getDob()
+                )
+        );
+
+
+        return orderResponse;
+    }
 }

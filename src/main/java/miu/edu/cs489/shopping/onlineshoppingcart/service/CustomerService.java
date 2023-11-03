@@ -1,7 +1,10 @@
 package miu.edu.cs489.shopping.onlineshoppingcart.service;
 
+import miu.edu.cs489.shopping.onlineshoppingcart.dto.creditcard.CreditCardRequest;
 import miu.edu.cs489.shopping.onlineshoppingcart.dto.customer.CustomerRequest;
 import miu.edu.cs489.shopping.onlineshoppingcart.dto.customer.CustomerResponse;
+import miu.edu.cs489.shopping.onlineshoppingcart.dto.customer.CustomerResponseWithCreditCard;
+import miu.edu.cs489.shopping.onlineshoppingcart.exception.AddressNotFoundException;
 import miu.edu.cs489.shopping.onlineshoppingcart.exception.CustomerNotFoundException;
 
 import java.util.List;
@@ -17,4 +20,8 @@ public interface CustomerService {
     CustomerResponse updateCustomerById(CustomerRequest customerRequest, int customerId) throws CustomerNotFoundException;
 
     void deleteCustomerById(int customerId) throws CustomerNotFoundException;
+
+    CustomerResponseWithCreditCard addCustomerCreditCard(
+            Integer customerId,
+            CreditCardRequest creditCardRequest) throws CustomerNotFoundException;
 }

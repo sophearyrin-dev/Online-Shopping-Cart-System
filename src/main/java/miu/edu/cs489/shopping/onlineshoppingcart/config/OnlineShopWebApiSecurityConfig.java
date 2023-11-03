@@ -38,7 +38,7 @@ public class OnlineShopWebApiSecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(
                         auth -> {
-                            auth.requestMatchers("/osc/api/v1/service/public/**").permitAll()
+                            auth.requestMatchers("/osc/api/v1/service/public/**","/v3/api-docs/**","/swagger-ui/**","/api/v2/api-docs").permitAll()
                                     .requestMatchers("/osc/api/v1/customer/**").authenticated()
                                     .requestMatchers("/osc/api/v1/**").permitAll();
                         }

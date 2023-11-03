@@ -12,4 +12,6 @@ public interface OrderService {
 
     OrderResponse addNewOrder(OrderRequest orderRequest);
 
+    OrderResponse getOrderByOrderId(Integer orderId);
+
 }

@@ -43,35 +43,5 @@ public class ProductServiceImp implements ProductService {
         ).collect(Collectors.toList());
     }
 
-    @Override
-    public ProductResponse addNewProduct(ProductRequest productRequest) {
-
-        Product productTobeAdd = new Product(
-                productRequest.SKU(),
-                productRequest.description(),
-                productRequest.price(),
-                productRequest.stock()
-        );
-
-        Optional<Category> categoryOfProduct = categoryRepository.findById(productRequest.categoryId());
-
-        productTobeAdd.setCategory(categoryOfProduct.get());
-
-        Product productSaved = productRepository.save(productTobeAdd);
-
-        ProductResponse productResponse = new ProductResponse(
-                productSaved.getProductId(),
-                productSaved.getSKU(),
-                productSaved.getDescription(),
-                productSaved.getPrice(),
-                productSaved.getStock(),
-                new CategoryResponse(
-                        productSaved.getCategory().getCategoryId(),
-                        productSaved.getCategory().getName()
-                )
-        );
-        return productResponse;
-    }
-
 
 }

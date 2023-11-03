@@ -11,8 +11,6 @@ public record ProductRequest(
 
         double price,
 
-        int stock,
-
-        Integer categoryId
+        int stock
 ) {
 }
