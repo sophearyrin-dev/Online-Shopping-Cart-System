@@ -21,7 +21,7 @@ import java.util.List;
 
 @SpringBootApplication
 @OpenAPIDefinition(info = @Info(title = "Online Shopping Cart API", version = "3.0", description = "Online Shopping Cart System"))
-@SecurityScheme(name = "onlineshopapi", scheme = "basic", type = SecuritySchemeType.HTTP, in = SecuritySchemeIn.HEADER)
+@SecurityScheme(name = "onlineshopapi", scheme = "bearer", bearerFormat = "JWT", type = SecuritySchemeType.HTTP, in = SecuritySchemeIn.HEADER)
 public class OnlineshoppingcartApplication {
 
     private UserRepository userRepository;

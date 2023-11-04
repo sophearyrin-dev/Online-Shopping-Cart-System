@@ -22,7 +22,14 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
  */
 @Configuration
 @EnableWebSecurity
-public class OnlineShopWebApiSecurityConfig {
+public class OnlineShopWebApiSecurityConfig{
+    private static final String[] AUTH_WHITE_LIST = {
+            "/v3/api-docs/**",
+            "/swagger-ui/**",
+            "/v2/api-docs/**",
+            "/swagger-resources/**"
+    };
+
     private OnlineShopUserDetailsService advantisUserDetailsService;
     private JWTAuthFilter jwtAuthFilter;
 
@@ -38,7 +45,12 @@ public class OnlineShopWebApiSecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(
                         auth -> {
-                            auth.requestMatchers("/osc/api/v1/service/public/**","/v3/api-docs/**","/swagger-ui/**","/api/v2/api-docs").permitAll()
+                            auth.requestMatchers("/osc/api/v1/service/public/**",
+                                            "/v3/api-docs/**",
+                                            "/swagger-ui/**",
+                                            "/v2/api-docs/**",
+                                            "/swagger-resources/**").permitAll()
+//                                    .requestMatchers(AUTH_WHITE_LIST).permitAll()
                                     .requestMatchers("/osc/api/v1/customer/**").authenticated()
                                     .requestMatchers("/osc/api/v1/**").permitAll();
                         }
