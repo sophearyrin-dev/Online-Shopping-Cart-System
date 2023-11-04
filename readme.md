@@ -14,6 +14,9 @@ An online shopping system must be able to store information about the customers 
 
 ```
 
+## Testing with coverage
+![img_1.png](img_1.png)
+
 ## Contributing
 
 Pull requests are welcome. For major changes, please open an issue first
