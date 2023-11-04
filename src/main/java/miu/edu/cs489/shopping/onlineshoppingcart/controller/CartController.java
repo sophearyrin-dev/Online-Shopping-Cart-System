@@ -1,15 +1,20 @@
 package miu.edu.cs489.shopping.onlineshoppingcart.controller;
 
-
-import jakarta.validation.Valid;
 import miu.edu.cs489.shopping.onlineshoppingcart.dto.cart.CartRequest;
 import miu.edu.cs489.shopping.onlineshoppingcart.dto.cart.CartResponse;
+import miu.edu.cs489.shopping.onlineshoppingcart.exception.CustomerNotFoundException;
+import miu.edu.cs489.shopping.onlineshoppingcart.exception.ProductNotFoundException;
 import miu.edu.cs489.shopping.onlineshoppingcart.service.CartService;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
+/**
+ * Cart Rest Controller
+ * @author sophearyrin
+ * @version 1.0
+ * @since Nov,2023
+ */
 @RestController
 @RequestMapping("/osc/api/v1/cart")
 public class CartController {
@@ -25,9 +30,10 @@ public class CartController {
         return ResponseEntity.ok(cartService.findAllCart());
     }
 
-
-    @PostMapping("/new")
-    public ResponseEntity<CartResponse> addNewAddress(@RequestBody @Valid CartRequest cartRequest){
-        return new ResponseEntity<>(cartService.addProductToCart(cartRequest), HttpStatus.CREATED);
+    @PostMapping("/add")
+    public ResponseEntity<String> addToCart(@RequestBody CartRequest cartRequest) throws ProductNotFoundException, CustomerNotFoundException {
+            cartService.addToCart(cartRequest);
+            return ResponseEntity.ok("Product added to the cart successfully.");
     }
+
 }

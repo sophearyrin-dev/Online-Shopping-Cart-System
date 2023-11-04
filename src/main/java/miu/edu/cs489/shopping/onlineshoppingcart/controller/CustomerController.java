@@ -50,11 +50,11 @@ public class CustomerController {
                 HttpStatus.ACCEPTED);
     }
 
-    @DeleteMapping("/delete/{customerId}")
-    public ResponseEntity<Void> deleteCustomerById(@PathVariable int customerId) throws CustomerNotFoundException{
-        customerService.deleteCustomerById(customerId);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-    }
+//    @DeleteMapping("/delete/{customerId}")
+//    public ResponseEntity<Void> deleteCustomerById(@PathVariable int customerId) throws CustomerNotFoundException{
+//        customerService.deleteCustomerById(customerId);
+//        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+//    }
 
 //    @GetMapping("/search/{searchString}")
 //    public ResponseEntity<List<PatientResponse>> quickSearchPatient(@PathVariable String searchString){

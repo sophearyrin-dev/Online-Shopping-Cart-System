@@ -10,6 +10,12 @@ import org.springframework.format.annotation.DateTimeFormat;
 import java.time.LocalDate;
 import java.util.List;
 
+/**
+ * Customer Model
+ * @author sophearyrin
+ * @version 1.0
+ * @since Nov,2023
+ */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -36,17 +42,14 @@ public class Customer {
     @JoinColumn(name = "address_id", unique = true)
     private Address address;
 
-    @OneToMany(mappedBy = "customer")
-    private List<Wishlist> wishlists;
-
-    @OneToMany(mappedBy = "customer")
-    private List<Cart> cart;
+    //Present here-----
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Cart> carts;
 
     @OneToMany(mappedBy = "customer")
     private List<CreditCard> creditCards;
 
-    @OneToMany(mappedBy = "customer")
-    private List<Order> orders;
+    //----
 
     public Customer(String firstName, String lastName, String email, LocalDate dob, String phoneNumber, Address address) {
         this.firstName = firstName;
@@ -55,6 +58,14 @@ public class Customer {
         this.dob = dob;
         this.phoneNumber = phoneNumber;
         this.address = address;
+    }
+
+    public Customer(String firstName, String lastName, String email, LocalDate dob, String phoneNumber) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.dob = dob;
+        this.phoneNumber = phoneNumber;
     }
 
     public Customer(Integer customerId) {

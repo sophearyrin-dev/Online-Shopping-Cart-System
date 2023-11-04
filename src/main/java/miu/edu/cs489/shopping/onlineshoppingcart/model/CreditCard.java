@@ -37,9 +37,6 @@ public class CreditCard {
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Customer customer;
 
-    @OneToOne(mappedBy = "creditCard")
-    private Payment payment;
-
 
     public CreditCard(String ccName, String ccNumber, LocalDate expirationDate, String cvc, Customer customer) {
         this.ccName = ccName;

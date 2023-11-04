@@ -6,7 +6,6 @@ import miu.edu.cs489.shopping.onlineshoppingcart.dto.creditcard.CreditCardRespon
 import miu.edu.cs489.shopping.onlineshoppingcart.dto.customer.CustomerRequest;
 import miu.edu.cs489.shopping.onlineshoppingcart.dto.customer.CustomerResponse;
 import miu.edu.cs489.shopping.onlineshoppingcart.dto.customer.CustomerResponseWithCreditCard;
-import miu.edu.cs489.shopping.onlineshoppingcart.exception.AddressNotFoundException;
 import miu.edu.cs489.shopping.onlineshoppingcart.exception.CustomerNotFoundException;
 import miu.edu.cs489.shopping.onlineshoppingcart.model.Address;
 import miu.edu.cs489.shopping.onlineshoppingcart.model.CreditCard;
@@ -158,6 +157,7 @@ public class CustomerServiceImp implements CustomerService {
         return patientResponse;
     }
 
+
     @Override
     public void deleteCustomerById(int customerId) throws CustomerNotFoundException{
         customerRepository.findById(customerId)
@@ -208,5 +208,10 @@ public class CustomerServiceImp implements CustomerService {
 
 
         return customerResponseWithCreditCard;
+    }
+
+    @Override
+    public Optional<Customer> findById(int customerId) {
+        return customerRepository.findById(customerId);
     }
 }

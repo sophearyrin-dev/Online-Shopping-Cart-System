@@ -55,7 +55,27 @@ public class OnlineshoppingcartApplication {
                 listAdminRoles.add(adminRole.get());
             }
             User newAdminUser = new User(null, "Admin", "Admin", "Admin", "admin",
-                    passwordEncoder.encode("test1234"), "admin@advantis.com",
+                    passwordEncoder.encode("test1234"), "admin@shop.com",
+                    true,true, true, true);
+            newAdminUser.setRoles(listAdminRoles);
+            userRepository.save(newAdminUser);
+        }
+    }
+
+    @PostConstruct
+    public void initCustomerUser() {
+        var user = userRepository.findUserByUsername("user");
+        if(user.isEmpty()) {
+            List<Role> listAdminRoles = new ArrayList<>();
+            var adminRole = roleRepository.findRoleByName("ROLE_USER");
+            if(adminRole.isEmpty()) {
+                var newAdminRole =  new Role(null, "ROLE_USER");
+                listAdminRoles.add(newAdminRole);
+            } else {
+                listAdminRoles.add(adminRole.get());
+            }
+            User newAdminUser = new User(null, "user", "user", "user", "user",
+                    passwordEncoder.encode("test1234"), "user@shop.com",
                     true,true, true, true);
             newAdminUser.setRoles(listAdminRoles);
             userRepository.save(newAdminUser);

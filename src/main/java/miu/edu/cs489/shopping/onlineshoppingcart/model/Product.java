@@ -10,6 +10,13 @@ import org.hibernate.annotations.OnDeleteAction;
 
 import java.util.List;
 
+/**
+ * Product Model
+ * @author sophearyrin
+ * @version 1.0
+ * @since Nov,2023
+ */
+//TODO: present
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -37,15 +44,12 @@ public class Product {
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Category category;
 
-    @OneToMany(mappedBy = "product")
-    private List<Wishlist> wishlists;
-
-    @OneToMany(mappedBy = "product")
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL,
+    orphanRemoval = true)
     private List<Cart> carts;
 
 
-    @OneToMany(mappedBy = "product")
-    private List<OrderLine> orderLines;
+
 
     public Product(String SKU, String description, double price, int stock) {
         this.SKU = SKU;

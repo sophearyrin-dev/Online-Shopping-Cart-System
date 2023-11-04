@@ -51,10 +51,6 @@ public class AddressController {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
-//    @GetMapping("/list")
-//    public ResponseEntity<List<AddressPatientResponse>> getAllAddressPatients(){
-//        return new ResponseEntity<>(addressService.findAllAddressPatient(), HttpStatus.FOUND);
-//    }
 
 
 
