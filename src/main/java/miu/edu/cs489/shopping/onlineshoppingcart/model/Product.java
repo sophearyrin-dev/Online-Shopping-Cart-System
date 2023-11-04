@@ -2,6 +2,7 @@ package miu.edu.cs489.shopping.onlineshoppingcart.model;
 
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -32,8 +33,12 @@ public class Product {
 
     private String description;
 
+    @Column(nullable = false)
+    @NotNull
     private double price;
 
+    @Column(nullable = false)
+    @NotNull
     private int stock;
 
     //TODO: image

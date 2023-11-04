@@ -2,6 +2,7 @@ package miu.edu.cs489.shopping.onlineshoppingcart.model;
 
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -23,13 +24,22 @@ public class CreditCard {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer creditCardId;
 
+    //Require
+    @Column(nullable = false)
+    @NotBlank
     private String ccName;
 
+    //Require
+    @Column(nullable = false)
+    @NotBlank
     private String ccNumber;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate expirationDate;
 
+    //Require
+    @Column(nullable = false)
+    @NotBlank
     private String cvc;
 
     @ManyToOne(fetch = FetchType.EAGER)

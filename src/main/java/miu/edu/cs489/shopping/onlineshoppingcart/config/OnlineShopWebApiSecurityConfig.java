@@ -52,6 +52,7 @@ public class OnlineShopWebApiSecurityConfig{
                                             "/swagger-resources/**").permitAll()
 //                                    .requestMatchers(AUTH_WHITE_LIST).permitAll()
                                     .requestMatchers("/osc/api/v1/customer/**").authenticated()
+                                    .requestMatchers("/osc/api/v1/cart/**").authenticated()
                                     .requestMatchers("/osc/api/v1/**").permitAll();
                         }
                 )

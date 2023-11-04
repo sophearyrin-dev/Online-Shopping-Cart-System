@@ -25,6 +25,11 @@ pwd: admin@123
 usenmae:shopadmin
 pwd:super123@
 
+aws
+db:shopdb
+shop
+password123
+
 ## Contributing
 
 Pull requests are welcome. For major changes, please open an issue first

@@ -28,6 +28,15 @@ public class ProductController {
         return ResponseEntity.ok(productService.findAllProducts());
     }
 
+    @PostMapping("/new")
+    public ResponseEntity<ProductResponse> addNewProduct(
+            @RequestBody ProductRequest newProduct){
+
+        return new ResponseEntity<>(productService.addNewProduct(newProduct),
+                HttpStatus.CREATED);
+
+    }
+
     @GetMapping("/search/{searchString}")
     public ResponseEntity<List<ProductResponse>> searchProducts(@PathVariable String searchString) throws ProductNotFoundException {
         return ResponseEntity.ok(productService.searchProducts(searchString));

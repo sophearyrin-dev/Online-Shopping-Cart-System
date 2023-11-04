@@ -1,5 +1,5 @@
 /**
- * In maintenace code
+ * Not currently used
  */
 //package miu.edu.cs489.shopping.onlineshoppingcart.config;
 //

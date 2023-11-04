@@ -1,8 +1,10 @@
 package miu.edu.cs489.shopping.onlineshoppingcart.service.imp;
 
 import miu.edu.cs489.shopping.onlineshoppingcart.dto.category.CategoryResponse;
+import miu.edu.cs489.shopping.onlineshoppingcart.dto.product.ProductRequest;
 import miu.edu.cs489.shopping.onlineshoppingcart.dto.product.ProductResponse;
 import miu.edu.cs489.shopping.onlineshoppingcart.exception.ProductNotFoundException;
+import miu.edu.cs489.shopping.onlineshoppingcart.model.Category;
 import miu.edu.cs489.shopping.onlineshoppingcart.model.Customer;
 import miu.edu.cs489.shopping.onlineshoppingcart.model.Product;
 import miu.edu.cs489.shopping.onlineshoppingcart.repository.CategoryRepository;
@@ -45,6 +47,37 @@ public class ProductServiceImp implements ProductService {
                         )
                 )
         ).collect(Collectors.toList());
+    }
+
+    @Override
+    public ProductResponse addNewProduct(ProductRequest productRequest) {
+
+        Product productTobeAdd = new Product(
+                productRequest.SKU(),
+                productRequest.description(),
+                productRequest.price(),
+                productRequest.stock()
+        );
+
+        Optional<Category> categoryOfProduct =
+                categoryRepository.findById(productTobeAdd.getCategory().getCategoryId());
+
+        productTobeAdd.setCategory(categoryOfProduct.get());
+
+        Product productSaved = productRepository.save(productTobeAdd);
+
+        ProductResponse productResponse = new ProductResponse(
+                productSaved.getProductId(),
+                productSaved.getSKU(),
+                productSaved.getDescription(),
+                productSaved.getPrice(),
+                productSaved.getStock(),
+                new CategoryResponse(
+                        productSaved.getCategory().getCategoryId(),
+                        productSaved.getCategory().getName()
+                )
+        );
+        return productResponse;
     }
 
     @Override
