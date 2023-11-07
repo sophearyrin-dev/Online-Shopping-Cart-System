@@ -3,6 +3,7 @@ package miu.edu.cs489.shopping.onlineshoppingcart.controller;
 import jakarta.validation.Valid;
 import miu.edu.cs489.shopping.onlineshoppingcart.dto.address.AddressRequest;
 import miu.edu.cs489.shopping.onlineshoppingcart.dto.address.AddressResponse;
+import miu.edu.cs489.shopping.onlineshoppingcart.dto.address.AddressResponseClass;
 import miu.edu.cs489.shopping.onlineshoppingcart.exception.AddressNotFoundException;
 import miu.edu.cs489.shopping.onlineshoppingcart.service.AddressService;
 import org.springframework.http.HttpStatus;
@@ -22,7 +23,7 @@ public class AddressController {
     }
 
     @GetMapping("/list")
-    public ResponseEntity<List<AddressResponse>> getAllAddresses(){
+    public ResponseEntity<List<AddressResponseClass>> getAllAddresses(){
         return ResponseEntity.ok(addressService.getAllAddresses());
     }
 

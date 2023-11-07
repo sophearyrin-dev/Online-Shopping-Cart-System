@@ -9,6 +9,7 @@ import jakarta.annotation.PostConstruct;
 import miu.edu.cs489.shopping.onlineshoppingcart.model.User;
 import miu.edu.cs489.shopping.onlineshoppingcart.repository.RoleRepository;
 import miu.edu.cs489.shopping.onlineshoppingcart.repository.UserRepository;
+import org.modelmapper.ModelMapper;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -29,6 +30,11 @@ public class OnlineshoppingcartApplication {
 
     private RoleRepository roleRepository;
     private PasswordEncoder passwordEncoder;
+
+    @Bean
+    public ModelMapper modelMapper(){
+        return new ModelMapper();
+    }
 
     public OnlineshoppingcartApplication(UserRepository userRepository,
                                  RoleRepository roleRepository,

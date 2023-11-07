@@ -3,13 +3,14 @@ package miu.edu.cs489.shopping.onlineshoppingcart.service;
 
 import miu.edu.cs489.shopping.onlineshoppingcart.dto.address.AddressRequest;
 import miu.edu.cs489.shopping.onlineshoppingcart.dto.address.AddressResponse;
+import miu.edu.cs489.shopping.onlineshoppingcart.dto.address.AddressResponseClass;
 import miu.edu.cs489.shopping.onlineshoppingcart.exception.AddressNotFoundException;
 
 import java.util.List;
 
 public interface AddressService {
 
-    List<AddressResponse> getAllAddresses();
+    List<AddressResponseClass> getAllAddresses();
 
     AddressResponse addNewAddress(AddressRequest newAddress);
 

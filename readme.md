@@ -12,7 +12,7 @@ An online shopping system must be able to store information about the customers 
 ## Running on Azure cloud
 [You can view here](https://online-shopping-cart-system2.azurewebsites.net/swagger-ui/index.html#/)
 
-## Swagger API doc
+## Swagger API doc and Authentication and Authorization with Swagger
 ![img_2.png](img_2.png)
 
 ## Testing with coverage
@@ -44,5 +44,4 @@ Please make sure to update tests as appropriate.
 
 
 ## License
-
 [Sopheary Rin](https://sophearyrin-dev.github.io/)

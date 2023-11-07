@@ -2,12 +2,15 @@ package miu.edu.cs489.shopping.onlineshoppingcart.service.imp;
 
 import miu.edu.cs489.shopping.onlineshoppingcart.dto.address.AddressRequest;
 import miu.edu.cs489.shopping.onlineshoppingcart.dto.address.AddressResponse;
+import miu.edu.cs489.shopping.onlineshoppingcart.dto.address.AddressResponseClass;
 import miu.edu.cs489.shopping.onlineshoppingcart.exception.AddressNotFoundException;
 import miu.edu.cs489.shopping.onlineshoppingcart.model.Address;
 import miu.edu.cs489.shopping.onlineshoppingcart.repository.AddressRepository;
 import miu.edu.cs489.shopping.onlineshoppingcart.service.AddressService;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -15,26 +18,47 @@ import java.util.stream.Collectors;
 public class AddressServiceImp implements AddressService {
 
     private AddressRepository addressRepository;
+    private ModelMapper modelMapper;
 
-    public AddressServiceImp(AddressRepository addressRepository) {
+    public AddressServiceImp(AddressRepository addressRepository,
+                             ModelMapper modelMapper
+    ) {
         this.addressRepository = addressRepository;
+        this.modelMapper = modelMapper;
     }
 
     @Override
-    public List<AddressResponse> getAllAddresses() {
+    public List<AddressResponseClass> getAllAddresses() {
         //originally get all address as list of address
         //return as list of address response
         //map from each originally object to address response
 
-        return addressRepository.findAll()
-                .stream()
-                .map(a -> new AddressResponse(
-                        a.getAddressId(),
-                        a.getStreet(),
-                        a.getCity(),
-                        a.getState(),
-                        a.getZipCode()
-                )).collect(Collectors.toList());
+//        return addressRepository.findAll()
+//                .stream()
+//                .map(a -> new AddressResponse(
+//                        a.getAddressId(),
+//                        a.getStreet(),
+//                        a.getCity(),
+//                        a.getState(),
+//                        a.getZipCode()
+//                )).collect(Collectors.toList());
+
+//        List<Address> addresses = addressRepository.findAll();
+//        List<AddressResponse> addressResponses;
+
+        List<Address> addresses = addressRepository.findAll();
+//        List<AddressResponse> addressResponses = addresses.stream()
+//                .map(address -> modelMapper.map(address, AddressResponse.class))
+//                .collect(Collectors.toList());
+//
+//        return addressResponses;
+
+        return addresses==null? new ArrayList<>() : addresses.stream()
+                .map(address -> modelMapper.map(address, AddressResponseClass.class))
+                .collect(Collectors.toList());
+
+
+
     }
 
     @Override
